@@ -4,6 +4,9 @@ import re
 import requests
 
 class Event:
+    """
+    Container class for Eventbrite Events
+    """
     html = None
     title = None
     date = None
@@ -25,9 +28,6 @@ class Event:
         title = re.findall('<h1 class="listing-hero-title" data-automation="listing-title">(.*?)</h1>', self.html)
         self.title = title[0] if title else None
 
-    def to_tuple(self):
-        pass
-
     def __repr__(self):
         res = ""
         res += f'title: {self.title}\n'
@@ -43,9 +43,8 @@ class Event:
         self.description = bs4_object.text if bs4_object else None
 
 
-# e = Event('https://www.eventbrite.com/e/hackcovid-weekly-anti-coronavirus-online-hackathon-tickets-101126405802?aff=ebdssbonlinesearch')
-# e.download_html()
 if __name__=='__main__':
+    # Just for testing
     with open('event.pkl', 'rb') as file:
         e = pickle.load(file)
     e.extract_title()
